@@ -1,13 +1,26 @@
-﻿ /*
-  KsiazkaFizyczna fizycznaKsiazka = new KsiazkaFizyczna("Tytuł 1", "Autor 1", "Kategoria 1", 29.99f, 10, 1);
-        KsiazkaElektroniczna elektronicznaKsiazka = new KsiazkaElektroniczna("Tytuł 2", "Autor 2", "Kategoria 2", 19.99f);
+﻿
 
-        Console.WriteLine(fizycznaKsiazka.GetDetails());
-        Console.WriteLine(elektronicznaKsiazka.GetDetails());
+//jakieś przykładowe klasy, można usunąć
 
-        Console.WriteLine("Aktualizacja stanu:");
-        fizycznaKsiazka.UpdateStan();
-        elektronicznaKsiazka.UpdateStan();
-        */
+KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 10, 1);
 
+KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10, 1);
+
+KsiazkaFizyczna ksiazka3 =  new KsiazkaFizyczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 10, 1);
+
+Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
+
+List<Ksiazka> ksiazki = [ksiazka1, ksiazka2, ksiazka3];
+
+Zamowienia zamowienie = new Zamowienia(321, ksiazki,0);
+
+marmur.DodajZamowienie(zamowienie);
+
+marmur.WyszukajKsiazke(zamowienie, "Wiedź");
+
+marmur.DodajDoKoszyka(ksiazka1);
+
+marmur.ZlozZamowienie();
+
+marmur.WyswietlZamowienia();
         

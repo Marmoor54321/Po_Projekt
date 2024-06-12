@@ -1,16 +1,14 @@
 public class Uzytkownik
 {
-    //konstruktory
-    //
-    //
+    
     private string login{get; set;}
     private string haslo{get; set;}
     private string email{get; set;}
     private string adres{get; set;}
 
-    public List<Zamowienia> zamowienia = new List<Zamowienia>();
+    public List<Zamowienia> zamowienia {get; set;}
 
-    public List<Ksiazka> koszyk = new List<Ksiazka>();
+    public List<Ksiazka> koszyk {get; set;}
 
     public Uzytkownik(string login, string haslo, string email, string adres)
     {
@@ -18,25 +16,32 @@ public class Uzytkownik
         this.haslo = haslo;
         this.email = email;
         this.adres = adres;
+        zamowienia = new List<Zamowienia>();
+        koszyk = new List<Ksiazka>();
     }
 
+    
+   
+
+   
 
     //Nie wiem po co jest ta funkcja. Ma zwracać wszystkie info użytkownika?
-    public string getInfo()
+    public string GetInfo()
     {
         return $"Login: {login}, haslo: {haslo}, email: {email}, adres: {adres}.";
     }
 
-
-    //wyszukuje książkę z podanego zamówienia i wyświetla jej informacje w zamoweniu (np. ilość kupionych, autor itd.)
-    public string wyszukajKsiazkse(Zamowienia zamowienie, string czescTytulu)
+    bool t=false;
+    //wyszukuje książkę z podanego zamówienia i wyświetla jej informacje w zamoweniu (dodać opcję kupowania kilku sztuk tej samej książki?)
+    public void WyszukajKsiazke(Zamowienia zamowienie, string czescTytulu)
     {
-        List<string> znalezioneKsiazki = new List<string>();
+        
         for(int i = 0; i<zamowienie.ksiazki.Count; i++)
         {
-            
+            t=true;
            if (zamowienie.ksiazki[i].tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase))
             {
+
                 if(zamowienie.ksiazki[i] is KsiazkaElektroniczna ke)
                 {
                     string format;
@@ -50,7 +55,7 @@ public class Uzytkownik
                         format = "Audiobook";
                     }
 
-                    znalezioneKsiazki.Add($"Tytul: {ke.tytul}, autor: {ke.autor}, kategoria:{ke.kategoria}, cena: {ke.cenaEle}, format: {format}.");
+                    Console.WriteLine($"Tytul: {ke.tytul}, autor: {ke.autor}, kategoria:{ke.kategoria}, cena: {ke.cenaEle}, format: {format}.");
                 }
                 else if(zamowienie.ksiazki[i] is KsiazkaFizyczna kf)
                 {
@@ -65,12 +70,71 @@ public class Uzytkownik
                         format = "Twarda okładka";
                     }
 
-                    znalezioneKsiazki.Add ($"Tytul: {kf.tytul}, autor: {kf.autor}, {kf.kategoria}, cena: {kf.cenaFiz}, format: {format}");
+                    Console.WriteLine($"Tytul: {kf.tytul}, autor: {kf.autor}, {kf.kategoria}, cena: {kf.cenaFiz}, format: {format}");
                 }
             }
         }
-        
-        return "Brak książki";
+        if(t==false)
+        Console.WriteLine("Nie znaleziono książki.");        
     }
 
+    //jeszcze nie wiem czy DodajZamowienie jest potrzebne ale na razie niech będzie
+    public void DodajZamowienie(Zamowienia zamowienie)
+        {
+            zamowienia.Add(zamowienie);
+        }
+
+
+        public void DodajDoKoszyka(Ksiazka ksiazka)
+        {
+            koszyk.Add(ksiazka);
+        }
+    
+        public Zamowienia ZlozZamowienie()
+        {
+             Random random = new Random();
+
+             int losoweId = random.Next(1000, 10000+1);
+
+             Zamowienia zamowienie =  new Zamowienia(losoweId, koszyk, 0);
+             
+
+             //wyczyszczenie koszyka po zakupie
+             koszyk.Clear();
+
+             return zamowienie;
+        }
+
+        public string SledzZamowienie(Zamowienia zamowienie)
+        {
+            if(zamowienie.statusZamowienia == 0)
+            {
+                return "Zamowienie oczekiwuje wysyłki";
+            }
+            if(zamowienie.statusZamowienia == 1)
+            {
+                return "Zamowienie przekazane do wysłania";
+            }
+            if(zamowienie.statusZamowienia == 2)
+            {
+                return "Zamowienie w drodze";
+            }
+             if(zamowienie.statusZamowienia == 3)
+            {
+                return "Zamowienie czeka na odbiór";
+            }
+            if(zamowienie.statusZamowienia == 4)
+            {
+                return "Zamowienie odebrane";
+            }
+            return "Błąd";
+        }
+
+        public void WyswietlZamowienia()
+        {
+            foreach(var zamowienie in zamowienia)
+            {
+                Console.WriteLine($"Id zamówienia: {zamowienie.idZamowienia}, status zamowienia: {zamowienie.statusZamowienia}.");
+            }
+        }
 }

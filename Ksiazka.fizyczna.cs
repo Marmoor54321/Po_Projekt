@@ -4,6 +4,8 @@ public class KsiazkaFizyczna : Ksiazka
     public int stan { get; set; }
     public int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka
 
+
+    
     public KsiazkaFizyczna(string tytul, string autor, string kategoria, float cenaFiz, int stan, int formatKsiazki)
         : base(tytul, autor, kategoria)
     {
