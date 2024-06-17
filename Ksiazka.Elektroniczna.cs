@@ -4,6 +4,7 @@ public class KsiazkaElektroniczna : Ksiazka
     
     public int formatKsiazki {get; set;}
 
+    //stan książki elektronicznej: 0-niedostępna, 1-dostępna
     public int stan {get; set;}
     public KsiazkaElektroniczna(string tytul, string autor, string kategoria, float cenaEle, int stan, int formatKsiazki)
         : base(tytul, autor, kategoria)

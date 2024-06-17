@@ -2,11 +2,11 @@
 
 //jakieś przykładowe klasy, można usunąć
 
-KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 10, 1);
+KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4, 1);
 
 KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10, 1);
 
-KsiazkaFizyczna ksiazka3 =  new KsiazkaFizyczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 10, 1);
+KsiazkaFizyczna ksiazka3 =  new KsiazkaFizyczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 54, 1);
 
 Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
 
@@ -23,4 +23,8 @@ marmur.DodajDoKoszyka(ksiazka1);
 marmur.ZlozZamowienie();
 
 marmur.WyswietlZamowienia();
+
+Pracownik mateusz = new Pracownik("mateusz", "123", "mateusz@gmail.com");
+
+mateusz.statusMagazynu(ksiazki);
         
