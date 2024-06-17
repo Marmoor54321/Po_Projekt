@@ -1,5 +1,6 @@
 public class KsiazkaElektroniczna : Ksiazka
 {
+//gotowa klasa 
     public float cenaEle { get; set; }
     
     public int formatKsiazki {get; set;}
