@@ -21,9 +21,11 @@ public class KsiazkaFizyczna : Ksiazka
         return base.GetDetails() + $", CenaFiz: {cenaFiz}, Stan: {stan}, Format: {formatKsiazki}";
     }
 
+    /*
     public override int UpdateStan()
     {
-        // Logika aktualizacji stanu dla książki fizycznej
+        
         return stan;
     }
+    */
 }

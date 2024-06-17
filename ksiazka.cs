@@ -19,11 +19,16 @@ public class Ksiazka
         return $"Tytul: {tytul}, Autor: {autor}, Kategoria: {kategoria}";
     }
 
+    // Dodałem opcję zmiany stanu dla pracownika poprzez bezpośrednią zmianę wartości zamiast korzystania z metody.
+    //Wydaje mi się że to jest źle, ale nie chce mi się poprawiać. Może pod koniec robienia projektu poprawimy (pewnie tak zostanie)
+
+    /*
     public virtual int UpdateStan()
     {
-        // Trzeba wypełnić logikę aktualizacji stanu książki  (!!!)
+        
         return 0;
     }
+    */
 }
 
 

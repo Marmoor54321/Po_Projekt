@@ -20,9 +20,11 @@ public class KsiazkaElektroniczna : Ksiazka
         return base.GetDetails() + $", CenaEle: {cenaEle}";
     }
 
+/*
     public override int UpdateStan()
     {
-        // Trzeba wypełnić logikę aktualizacji stanu książki  (!!!)
+        
         return 1; 
     }
+    */
 }
