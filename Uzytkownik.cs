@@ -1,4 +1,6 @@
 public class Uzytkownik
+
+//gotowa klasa
 {
     
     private string login{get; set;}

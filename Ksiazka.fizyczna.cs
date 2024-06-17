@@ -1,5 +1,7 @@
 public class KsiazkaFizyczna : Ksiazka
 {
+
+    //gotowa klasa
     public float cenaFiz { get; set; }
     public int stan { get; set; }
     public int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka

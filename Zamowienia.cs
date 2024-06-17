@@ -2,6 +2,8 @@ using System.ComponentModel;
 
 public class Zamowienia
 {
+
+//gotowa klasa
     public int idZamowienia;
 
     public List<Ksiazka> ksiazki = new List<Ksiazka>();

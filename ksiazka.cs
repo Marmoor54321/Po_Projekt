@@ -2,6 +2,7 @@ using System;
 
 public class Ksiazka
 {
+//gotowa klasa
     public string tytul { get; set; }
     public string autor { get; set; }
     public string kategoria { get; set; }

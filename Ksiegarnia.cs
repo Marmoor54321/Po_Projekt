@@ -1,5 +1,7 @@
 public class Ksiegarnia
 {
+//niegotowa klasa
+
     //konstruktor? chyba domyślny starczy
   private  List<Ksiazka> ksiazki = new List<Ksiazka>();
 

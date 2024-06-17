@@ -6,7 +6,7 @@ KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski"
 
 KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10, 1);
 
-KsiazkaFizyczna ksiazka3 =  new KsiazkaFizyczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 54, 1);
+KsiazkaElektroniczna ksiazka3 =  new KsiazkaElektroniczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 1, 1);
 
 Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
 

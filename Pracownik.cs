@@ -1,5 +1,7 @@
 public class Pracownik
 {
+
+    //niegotowa klasa
     private string login{get; set;}
     private string haslo{get; set;}
     private string email{get; set;}
@@ -30,7 +32,7 @@ public class Pracownik
                     else if(ksiazki[i] is KsiazkaElektroniczna ksiazkaelek)
                     {
                         //stan książki elektronicznej: 0-niedostępna, 1-dostępna
-                        Console.WriteLine($"[{i}] Typ: elektroniczna, tytuł: {ksiazkaelek.tytul}, autor: {ksiazkaelek.autor}, ilość w magazynie: {ksiazkaelek.stan}, cena: {ksiazkaelek.cenaEle}.");  
+                        Console.WriteLine($"[{i}] Typ: elektroniczna, tytuł: {ksiazkaelek.tytul}, autor: {ksiazkaelek.autor}, dostepna?: {ksiazkaelek.stan}, cena: {ksiazkaelek.cenaEle}.");  
                     }
                 }
             }
