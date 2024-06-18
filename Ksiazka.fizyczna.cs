@@ -1,12 +1,30 @@
+using System.Dynamic;
+
 public class KsiazkaFizyczna : Ksiazka
 {
 
     //gotowa klasa
-    public float cenaFiz { get; set; }
-    public int stan { get; set; }
-    public int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka
+    private float cenaFiz { get; set; }
+    private int stan { get; set; }
+    private int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka
 
+    public float CenaFiz
+    {
+        get {return cenaFiz;}
+        set {cenaFiz = value;}
+    }
 
+    public int Stan
+    {
+        get {return stan;}
+        set {stan = value;}
+    }
+
+    public int FormatKsiazki
+    {
+        get {return formatKsiazki;}
+        set {formatKsiazki = value;}
+    }
     
     public KsiazkaFizyczna(string tytul, string autor, string kategoria, float cenaFiz, int stan, int formatKsiazki)
         : base(tytul, autor, kategoria)

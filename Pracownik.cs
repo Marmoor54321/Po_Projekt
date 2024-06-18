@@ -4,9 +4,25 @@ public class Pracownik
     //niegotowa klasa
     //trzeba dodać opcję dodawania i usuwania książek, mozna to wrzucić do StanMagazynu()
     private string login{get; set;}
-    private string haslo{get; set;}
+    private string haslo{get; set;}     
     private string email{get; set;}
+        
+        
+    public string Login
+    {
+        get { return login; }       
+    }
 
+    public string Haslo
+    {
+        get { return haslo; }
+    }
+
+    public string Email
+    {
+        get { return email; }
+    }
+    
     public Pracownik(string login, string haslo, string email)
     {
         this.login = login;
@@ -16,6 +32,16 @@ public class Pracownik
     int wybor, wybor2=-1,wybor3,nowyStan=0;
 
     float nowaCena=0;
+
+    //sprawdza czy podane hasło jest poprawne
+     public bool SprawdzHaslo(string haslo)
+    {
+        return this.haslo == haslo;
+    }
+
+    //WAŻNE! metody pracownika trzeba zmodyfikować i przekleić do głównego programu w taki sposób, aby logika klasy była oddzielna od interface'u (inaczej mówiąc zesrałem się)
+    //tzn. metody klasy w większości nie funkcjonują jako interfejs, a jedynie przetwarzają lub modyfikują dane
+    //zrobiłem już tak w większości z uzytkownikiem
 
     //Wypisanie stanu magazynu lub modyfikowanie stanu i ceny
     public List<Ksiazka> statusMagazynu(List<Ksiazka> ksiazki) 
@@ -38,12 +64,12 @@ public class Pracownik
                     {
                         if(ksiazki[i] is KsiazkaFizyczna ksiazkafiz)
                         {
-                            Console.WriteLine($"[{i}] Typ: fizyczna, tytuł: {ksiazkafiz.tytul}, autor: {ksiazkafiz.autor}, ilość w magazynie: {ksiazkafiz.stan}, cena: {ksiazkafiz.cenaFiz}.");
+                            Console.WriteLine($"[{i}] Typ: fizyczna, tytuł: {ksiazkafiz.Tytul}, autor: {ksiazkafiz.Autor}, ilość w magazynie: {ksiazkafiz.Stan}, cena: {ksiazkafiz.CenaFiz}.");
                         }
                         else if(ksiazki[i] is KsiazkaElektroniczna ksiazkaelek)
                         {
                             //stan książki elektronicznej: 0-niedostępna, 1-dostępna
-                            Console.WriteLine($"[{i}] Typ: elektroniczna, tytuł: {ksiazkaelek.tytul}, autor: {ksiazkaelek.autor}, dostepna?: {ksiazkaelek.stan}, cena: {ksiazkaelek.cenaEle}.");  
+                            Console.WriteLine($"[{i}] Typ: elektroniczna, tytuł: {ksiazkaelek.Tytul}, autor: {ksiazkaelek.Autor}, dostepna?: {ksiazkaelek.Stan}, cena: {ksiazkaelek.CenaEle}.");  
                         }
                     }
                 }
@@ -87,11 +113,11 @@ public class Pracownik
                                 }
                                 if(ksiazki[wybor2] is KsiazkaFizyczna ksiazkafiz)
                                 {
-                                    ksiazkafiz.cenaFiz = nowaCena;
+                                    ksiazkafiz.CenaFiz = nowaCena;
                                 }
                                 else if(ksiazki[wybor2] is KsiazkaElektroniczna ksiazkaelek)
                                 {
-                                ksiazkaelek.cenaEle = nowaCena;
+                                ksiazkaelek.CenaEle = nowaCena;
                                 }
                             
                         }
@@ -112,7 +138,7 @@ public class Pracownik
                             }
                             if(ksiazki[wybor2] is KsiazkaFizyczna ksiazkafiz)
                             {
-                                ksiazkafiz.stan = nowyStan;
+                                ksiazkafiz.Stan = nowyStan;
                             }
                             else if(ksiazki[wybor2] is KsiazkaElektroniczna ksiazkaelek)
                             {
@@ -121,7 +147,7 @@ public class Pracownik
                                     Console.WriteLine("Ksiazka elektroniczna może być tylko 0-niedostępna, 1-dostępna. Wpisz ponownie: ");
                                     nowyStan = StrNaInt();
                                 }
-                            ksiazkaelek.stan = nowyStan;
+                            ksiazkaelek.Stan = nowyStan;
                             }
 
                         }
@@ -173,22 +199,22 @@ public class Pracownik
                         if(zamowienia[i].ksiazki[j] is KsiazkaFizyczna ksiazkafiz)
                             {
                                 okladka="miękka okładka";
-                                if(ksiazkafiz.formatKsiazki==1)
+                                if(ksiazkafiz.FormatKsiazki==1)
                                 {
                                     okladka = "twarda okładka";
                                 }
 
-                                Console.WriteLine($"[{j}] Książka fizyczna-{okladka}, tytuł: {zamowienia[i].ksiazki[j].tytul}");
+                                Console.WriteLine($"[{j}] Książka fizyczna-{okladka}, tytuł: {zamowienia[i].ksiazki[j].Tytul}.");
                             }
                             else if(zamowienia[i].ksiazki[j] is KsiazkaElektroniczna ksiazkaelek)
                             {
                                 okladka="e-book";
-                                if(ksiazkaelek.formatKsiazki==1)
+                                if(ksiazkaelek.FormatKsiazki==1)
                                 {
                                     okladka = "audiobook";
                                 }
 
-                            Console.WriteLine($"[{j}] Książka elektroniczna-{okladka}, tytuł: {zamowienia[i].ksiazki[j].tytul}");
+                            Console.WriteLine($"[{j}] Książka elektroniczna-{okladka}, tytuł: {zamowienia[i].ksiazki[j].Tytul}");
                             }
                         
                     }
@@ -205,7 +231,7 @@ public class Pracownik
                 Console.WriteLine("Wybierz zamówienie do modyfikacji: ");
                 opcja1 = StrNaInt();
 
-                while(opcja1<0 || opcja1>zamowienia.Count()); //to nie działa nie wiem dlaczego, jutro to naprawię
+                while(opcja1<0 || opcja1>zamowienia.Count()) //to nie działa nie wiem dlaczego, jutro to naprawię
                 {
                     Console.WriteLine("Niepoprawne zamówienie. Wybierz ponownie: ");
                     opcja1 = StrNaInt();
@@ -220,7 +246,7 @@ public class Pracownik
                     opcja2 = StrNaInt();
                 }
 
-
+                zamowienia[opcja1].statusZamowienia = opcja2;
             }
             
         }
@@ -229,7 +255,7 @@ public class Pracownik
     }
 
 
-        public int StrNaInt()
+        private int StrNaInt()
     {
         string wyborStr;
         int wejscie;
@@ -252,7 +278,7 @@ public class Pracownik
             }
     }
 
-    public float StrNaFloat()
+    private float StrNaFloat()
     {
         float wejscie;
         

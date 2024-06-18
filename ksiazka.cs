@@ -3,10 +3,28 @@ using System;
 public class Ksiazka
 {
 //gotowa klasa
-    public string tytul { get; set; }
-    public string autor { get; set; }
-    public string kategoria { get; set; }
+    private string tytul; 
+    private string autor;
+    private string kategoria; 
 
+     public string Tytul
+    {
+        get { return tytul; }
+        set { tytul = value; }
+    }
+
+    public string Autor
+    {
+        get { return autor; }
+        set { autor = value; }
+    }
+
+    public string Kategoria
+    {
+        get { return kategoria; }
+        set { kategoria = value; }
+    }
+   
     public Ksiazka(string tytul, string autor, string kategoria)
     {
         this.tytul = tytul;

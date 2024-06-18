@@ -1,12 +1,33 @@
 public class KsiazkaElektroniczna : Ksiazka
 {
 //gotowa klasa 
-    public float cenaEle { get; set; }
+    private float cenaEle;
     
-    public int formatKsiazki {get; set;}
+    private int formatKsiazki;
+
+    private int stan;
+
+     public float CenaEle
+     {
+        get {return cenaEle;}
+        set {cenaEle = value;}
+     }
+
+     public int FormatKsiazki
+     {
+        get {return formatKsiazki;}
+        set {formatKsiazki = value;}
+     }
+        
+    public int Stan
+    {
+        get {return stan;}
+        set {stan = value;}
+    }
+
 
     //stan książki elektronicznej: 0-niedostępna, 1-dostępna
-    public int stan {get; set;}
+    
     public KsiazkaElektroniczna(string tytul, string autor, string kategoria, float cenaEle, int stan, int formatKsiazki)
         : base(tytul, autor, kategoria)
     {

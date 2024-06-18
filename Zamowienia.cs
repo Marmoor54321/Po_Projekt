@@ -25,13 +25,13 @@ public class Zamowienia
             if (ksiazka is KsiazkaElektroniczna ksiazkaElektroniczna)
             {
                 //1-audiobook, 0-cyfrowa
-                if (ksiazkaElektroniczna.formatKsiazki == 1)
+                if (ksiazkaElektroniczna.FormatKsiazki == 1)
                 {
-                    suma += ksiazkaElektroniczna.cenaEle + 5;
+                    suma += ksiazkaElektroniczna.CenaEle + 5;
                 }
                 else 
                 {
-                    suma += ksiazkaElektroniczna.cenaEle;
+                    suma += ksiazkaElektroniczna.CenaEle;
                 }
             }
             else 
@@ -39,13 +39,13 @@ public class Zamowienia
                 //1-twarda okładka, 0-miękka okładka
                 if (ksiazka is KsiazkaFizyczna ksiazkaFizyczna)
                 {
-                    if(ksiazkaFizyczna.formatKsiazki == 1)
+                    if(ksiazkaFizyczna.FormatKsiazki == 1)
                     {
-                        suma += ksiazkaFizyczna.cenaFiz + 3;
+                        suma += ksiazkaFizyczna.CenaFiz + 3;
                     }
                     else
                     {
-                        suma += ksiazkaFizyczna.cenaFiz;                    
+                        suma += ksiazkaFizyczna.CenaFiz;                    
                     }
                 }
             }
