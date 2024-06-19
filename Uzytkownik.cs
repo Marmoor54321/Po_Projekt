@@ -26,11 +26,13 @@ public string Login
     public string Email
     {
         get { return email; }
+        set {email = value;}
     }
 
     public string Adres
     {
         get { return adres; }
+        set {adres = value; }
     }
 
     public Uzytkownik()
@@ -51,40 +53,17 @@ public string Login
    
 
    
-    //sprawdza czy podane hasło jest poprawne
+    //sprawdza czy podane hasło jest poprawne (Niepotrzebne)
+    /*
      public bool SprawdzHaslo(string haslo)
     {
         return this.haslo == haslo;
     }
+    */
 
     bool t=false;
-    //wyszukuje książkę i wyświetla jej informacje w zamowieniu (dodać opcję kupowania kilku sztuk tej samej książki?)
-    public void WyszukajKsiazke(List<Ksiazka> ksiazki, string czescTytulu)
-    {
-        
-        for(int i = 0; i<ksiazki.Count; i++)
-        {
-            
-           if (ksiazki[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase))
-            {
-                t=true;
-                if(ksiazki[i] is KsiazkaElektroniczna ke)
-                {
-                    
-                    Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria:{ke.Kategoria}, cena: {ke.CenaEle}.");
-                }
-                else if(ksiazki[i] is KsiazkaFizyczna kf)
-                {
-              
-                    Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}.");
-                }
-            }
+    //wyszukuje książkę i wyświetla jej informacje w zamowieniu
     
-        }
-        if(t==false)
-        Console.WriteLine("Nie znaleziono książki.");        
-    }
-
     
     public void DodajZamowienie(Zamowienia zamowienie)
         {
@@ -94,15 +73,40 @@ public string Login
 
         public void DodajDoKoszyka(List<Ksiazka> ksiazki, string czescTytulu)
         {
+            int indeksKsiazki=-1;
+            int formatKsiazki;
              for(int i = 0; i<ksiazki.Count; i++)
              if (ksiazki[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase))
              {
+                
                 koszyk.Add(ksiazki[i]);
+                indeksKsiazki++;
+
+                if(koszyk[indeksKsiazki] is KsiazkaFizyczna kf)
+                {
+                    Console.WriteLine($"Wybierz format książki {kf.Tytul} 0-miękka okładka, 1-twarda okładka: ");
+                    formatKsiazki = InputExceptionHandler.StrNaInt();
+                    while(true)
+                    {   
+                        if(formatKsiazki<0 || formatKsiazki >1)
+                        {
+                            Console.WriteLine("Niepoprawny format książki 0-miękka okładka, 1-twarda okładka:");
+                            formatKsiazki = InputExceptionHandler.StrNaInt();
+                        }
+                        else
+                        break;
+                    }
+                    kf.FormatKsiazki = formatKsiazki;
+                }
+
+                Console.WriteLine($"Dodano książkę {ksiazki[i].Tytul} do koszyka.");
                 break;
              }
         }
-    
-        public void ZlozZamowienie()
+
+
+        //można zamówić kilka sztuk tej samej książki (yay)
+        public void ZlozZamowienie(List<Ksiazka> ksiazki)
         {
              Random random = new Random();
 
@@ -110,6 +114,34 @@ public string Login
 
              Zamowienia zamowienie =  new Zamowienia(losoweId, koszyk, 0);
              
+              foreach (var ksiazkaWKoszyku in koszyk)
+                {
+                    foreach (var ksiazka in ksiazki)
+                    {
+                        if(ksiazka is KsiazkaElektroniczna ke)
+                        {
+                            if(ke.Stan<1)
+                            {
+                                Console.WriteLine("Brak ksiazki na stanie.");
+                                break;
+                            }
+                        }
+                        else if(ksiazka is KsiazkaFizyczna kf)
+                        {
+                            if(kf.Stan<1)
+                            {
+                                Console.WriteLine("Brak ksiazki na stanie.");
+                                break;
+                            }
+                            else if (kf.Tytul == ksiazkaWKoszyku.Tytul)
+                            {   
+                                
+                                kf.Stan--; 
+                                break; 
+                            }
+                        }
+                    }
+                }
 
              //wyczyszczenie koszyka po zakupie
              koszyk.Clear();
@@ -159,7 +191,27 @@ public string Login
         {
             for(int i=0; i<koszyk.Count(); i++)
             {
-                Console.WriteLine($"[{i+1}]{koszyk[i].Tytul}");
+                foreach(var ksiazka in koszyk)
+                {
+                if(ksiazka is KsiazkaElektroniczna ke)
+                {
+                    string format = "ebook";
+                    if(ke.FormatKsiazki ==1)
+                    format="audiobook";
+                    
+                    Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria:{ke.Kategoria}, cena: {ke.CenaEle}, format: {format}.");
+                }
+                else if(ksiazka is KsiazkaFizyczna kf)
+                {
+                    string format = "miękka okładka";
+                    if(kf.FormatKsiazki == 1)
+                    format = "twarda okładka";
+              
+                    Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, format: {format}.");
+                }
+                }
             }
         }
+
+         
 }

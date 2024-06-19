@@ -1,6 +1,6 @@
 public class Ksiegarnia
 {
-//niegotowa klasa
+//gotowa klasa
 
     
   private  List<Ksiazka> ksiazki = new List<Ksiazka>();
@@ -72,6 +72,33 @@ public class Ksiegarnia
                     Console.WriteLine($"[{i+1}]Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, typ: fizyczna, stan: {kf.Stan}.");
                 }
       }
+    }
+
+
+    public void WyszukajKsiazke(List<Ksiazka> ksiazki, string czescTytulu)
+    {
+        bool t=false;
+        for(int i = 0; i<ksiazki.Count; i++)
+        {
+            
+           if (ksiazki[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase))
+            {
+                t=true;
+                if(ksiazki[i] is KsiazkaElektroniczna ke)
+                {
+                    
+                    Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria: {ke.Kategoria}, cena: {ke.CenaEle}, typ: elektroniczna, stan: {ke.Stan}.");
+                }
+                else if(ksiazki[i] is KsiazkaFizyczna kf)
+                {
+              
+                    Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, typ: fizyczna, stan: {kf.Stan}.");
+                }
+            }
+    
+        }
+        if(t==false)
+        Console.WriteLine("Nie znaleziono książki.");        
     }
 
 

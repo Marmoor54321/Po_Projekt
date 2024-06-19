@@ -26,14 +26,14 @@ public class KsiazkaElektroniczna : Ksiazka
     }
 
 
-    //stan książki elektronicznej: 0-niedostępna, 1-dostępna
-    
-    public KsiazkaElektroniczna(string tytul, string autor, string kategoria, float cenaEle, int stan, int formatKsiazki)
+    //stan książki elektronicznej: 0-niedostępna, 1-dostępna, format: 0-ebook 1-audiobook
+    //format podaje klient przy zakupie, nie ustawiamy go przy tworzeniu obiektu
+    public KsiazkaElektroniczna(string tytul, string autor, string kategoria, float cenaEle, int stan)
         : base(tytul, autor, kategoria)
     {
         this.cenaEle = cenaEle;
         this.stan = stan;
-        this.formatKsiazki = formatKsiazki;
+        
     }
 
     public override string GetDetails()

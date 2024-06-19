@@ -6,7 +6,7 @@ public class KsiazkaFizyczna : Ksiazka
     //gotowa klasa
     private float cenaFiz { get; set; }
     private int stan { get; set; }
-    private int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka
+    private int formatKsiazki { get; set; } // 1 - twarda okładka, 2 - miękka okładka //format podaje klient przy zakupie, nie ustawiamy go przy tworzeniu obiektu
 
     public float CenaFiz
     {
@@ -26,12 +26,12 @@ public class KsiazkaFizyczna : Ksiazka
         set {formatKsiazki = value;}
     }
     
-    public KsiazkaFizyczna(string tytul, string autor, string kategoria, float cenaFiz, int stan, int formatKsiazki)
+    public KsiazkaFizyczna(string tytul, string autor, string kategoria, float cenaFiz, int stan)
         : base(tytul, autor, kategoria)
     {
         this.cenaFiz = cenaFiz;
         this.stan = stan;
-        this.formatKsiazki = formatKsiazki;
+        
     }
 
     public override string GetDetails()

@@ -62,8 +62,8 @@ public class Program
 
              Ksiegarnia ksiegarnia = new Ksiegarnia();
 
-             KsiazkaFizyczna ksiazka1 = new KsiazkaFizyczna("Tytul 1", "Autor 1", "Kategoria 1", 20.5f, 10, 0);
-            KsiazkaElektroniczna ksiazka2 = new KsiazkaElektroniczna( "Tytul 2", "Autor 2", "Kategoria 2", 15.99f, 1, 1);
+             KsiazkaFizyczna ksiazka1 = new KsiazkaFizyczna("Tytul 1", "Autor 1", "Kategoria 1", 20.5f, 10);
+            KsiazkaElektroniczna ksiazka2 = new KsiazkaElektroniczna( "Tytul 2", "Autor 2", "Kategoria 2", 15.99f, 1);
             ksiegarnia.DodajKsiazke(ksiazka1);
             ksiegarnia.DodajKsiazke(ksiazka2);
             
@@ -110,9 +110,11 @@ public class Program
     {
         Console.WriteLine("Logowanie użytkownika.");
         Console.WriteLine("Podaj login:");
-        string login = Console.ReadLine();
+        string login = InputExceptionHandler.BezpiecznieWczytajString();
         Console.WriteLine("Podaj hasło:");
-        string haslo = Console.ReadLine();
+        string haslo = InputExceptionHandler.BezpiecznieWczytajString();
+
+
 
         // Sprawdzanie czy użytkownik istnieje
         List<Uzytkownik> uzytkownicy = ksiegarnia.PobierzUzytkownikow();
@@ -120,12 +122,14 @@ public class Program
 
         foreach (var uzytkownik in uzytkownicy)
         {
-            if (uzytkownik.Login == login && uzytkownik.SprawdzHaslo(haslo))
+            if (uzytkownik.Login == login && uzytkownik.Haslo == haslo)
             {
                 zalogowanyUzytkownik = uzytkownik;
                 break;
             }
         }
+
+
 
         if (zalogowanyUzytkownik != null)
         {
@@ -145,9 +149,16 @@ public class Program
             Console.WriteLine("5. Wyświetl zamówienia");
             Console.WriteLine("6. Śledź zamówienie");
             Console.WriteLine("7. Pokaż koszyk");
-            Console.WriteLine("8. Wyloguj");
+            Console.WriteLine("8. Podaj adres lub email");
+            Console.WriteLine("9. Wyloguj");
+
+
 
             int opcja = StrNaInt();
+            int opcja2;
+            string adresEmail;
+
+
 
             switch (opcja)
             {
@@ -159,22 +170,22 @@ public class Program
                 {
                     Console.WriteLine("Podaj tytuł książki do znalezienia: ");
 
-                    czescTytulu = Console.ReadLine();
+                    czescTytulu = InputExceptionHandler.BezpiecznieWczytajString();
 
-                    zalogowanyUzytkownik.WyszukajKsiazke(ksiegarnia.PobierzKsiazki(), czescTytulu);
+                    ksiegarnia.WyszukajKsiazke(ksiegarnia.PobierzKsiazki(), czescTytulu);
                 }
                     break;
                 case 3:
                     {
                     Console.WriteLine("Podaj tytuł książki do dodania do koszyka: ");
 
-                    czescTytulu = Console.ReadLine();
+                    czescTytulu = InputExceptionHandler.BezpiecznieWczytajString();
 
                     zalogowanyUzytkownik.DodajDoKoszyka(ksiegarnia.PobierzKsiazki(), czescTytulu);
                     }
                     break;
                 case 4:
-                    zalogowanyUzytkownik.ZlozZamowienie();
+                    zalogowanyUzytkownik.ZlozZamowienie(ksiegarnia.PobierzKsiazki());
                     break;
                 case 5:
                     {
@@ -193,6 +204,28 @@ public class Program
                     zalogowanyUzytkownik.WyswietlKoszyk();
                     break;
                 case 8:
+                {
+                    Console.WriteLine("1. Adres\n2. email");
+                    opcja2=StrNaInt();
+                    switch(opcja2)
+                    {
+                        case 1:
+                        {
+                            Console.WriteLine("Podaj adres:");
+                            zalogowanyUzytkownik.Adres = InputExceptionHandler.BezpiecznieWczytajString();
+                            
+                        }
+                        break;
+                        case 2:
+                        {
+                            Console.WriteLine("Podaj email: ");
+                            zalogowanyUzytkownik.Email = InputExceptionHandler.BezpiecznieWczytajString();
+                        }
+                        break;
+                    }
+                }
+                break;
+                case 9:
                     Console.WriteLine("Wylogowano.");
                     return;
                 default:
@@ -208,13 +241,14 @@ public class Program
         }
     }
 
+
       private static void ZalogujJakoPracownik(Ksiegarnia ksiegarnia)
     {
         Console.WriteLine("Logowanie pracownika.");
         Console.WriteLine("Podaj login:");
-        string login = Console.ReadLine();
+        string login = InputExceptionHandler.BezpiecznieWczytajString();
         Console.WriteLine("Podaj hasło:");
-        string haslo = Console.ReadLine();
+        string haslo = InputExceptionHandler.BezpiecznieWczytajString();
 
         // Sprawdzanie istnienia pracownika
         List<Pracownik> pracownicy = ksiegarnia.PobierzPracownikow();
@@ -233,7 +267,71 @@ public class Program
         {
             Console.WriteLine($"Zalogowano jako pracownik: {zalogowanyPracownik.Login}");
             // Tutaj dodawać funkcjonalności pracownika
+            // TODO dokończyć opcje pracownika
 
+            while(true)
+            {
+            Console.WriteLine("\nWybierz opcję:");
+            Console.WriteLine("1. Wyświetl książki");
+            Console.WriteLine("2. Wyszukaj książkę");
+            Console.WriteLine("3. Dodaj książkę");
+            Console.WriteLine("4. ");
+            Console.WriteLine("5. ");
+            Console.WriteLine("6. ");
+            Console.WriteLine("7. ");
+            Console.WriteLine("8. ");
+            Console.WriteLine("9. Wyloguj");
+
+            int opcja;
+
+            string czescTytulu;
+
+            opcja = StrNaInt();
+
+            switch(opcja)
+            {
+                case 1:
+                {
+                    ksiegarnia.WypiszKsiazki();
+                }
+                break;
+
+                case 2:
+                {
+                     Console.WriteLine("Podaj tytuł książki do znalezienia: ");
+
+                    czescTytulu = InputExceptionHandler.BezpiecznieWczytajString();
+
+                    ksiegarnia.WyszukajKsiazke(ksiegarnia.PobierzKsiazki(), czescTytulu);
+
+                }
+                break;
+
+                case 3:
+                {
+                    int fizCzyElektr;
+                    string tytul;
+                    string autor;
+                    string kategoria;
+
+                    Console.WriteLine("1-Fizyczna, 2-Elektroniczna");
+                    fizCzyElektr = StrNaInt();
+                    Console.WriteLine("Podaj Tytuł: ");
+                    tytul = InputExceptionHandler.BezpiecznieWczytajString();
+
+
+                }
+                break;
+
+                case 9:
+                {
+                    Console.WriteLine("Wylogowano.");
+                    return;
+                }
+                
+            }
+
+        }
         }
         else
         {
@@ -251,7 +349,7 @@ public class Program
             {
 
 
-                wyborStr = Console.ReadLine();
+                wyborStr = InputExceptionHandler.BezpiecznieWczytajString();
                 try
                 {
                     wejscie = int.Parse(wyborStr);
@@ -262,8 +360,15 @@ public class Program
                 {
                     Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Wystąpił nieoczekiwany błąd: " + ex.Message);
+                    Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
+                }
             }
     }
+
+
         
 }
 

@@ -1,8 +1,7 @@
 public class Pracownik
 {
 
-    //niegotowa klasa
-    //trzeba dodać opcję dodawania i usuwania książek, mozna to wrzucić do StanMagazynu()
+    //gotowa klasa
     private string login{get; set;}
     private string haslo{get; set;}     
     private string email{get; set;}
@@ -22,6 +21,11 @@ public class Pracownik
     {
         get { return email; }
     }
+
+    public Pracownik()
+    {
+
+    }
     
     public Pracownik(string login, string haslo, string email)
     {
@@ -33,18 +37,20 @@ public class Pracownik
 
     float nowaCena=0;
 
-    //sprawdza czy podane hasło jest poprawne
+    //sprawdza czy podane hasło jest poprawne (niepotrzebne)
+    /*
      public bool SprawdzHaslo(string haslo)
     {
         return this.haslo == haslo;
     }
+    */
 
     //WAŻNE! metody pracownika trzeba zmodyfikować i przekleić do głównego programu w taki sposób, aby logika klasy była oddzielna od interface'u (inaczej mówiąc zesrałem się)
     //tzn. metody klasy w większości nie funkcjonują jako interfejs, a jedynie przetwarzają lub modyfikują dane
     //zrobiłem już tak w większości z uzytkownikiem
 
-    //Wypisanie stanu magazynu lub modyfikowanie stanu i ceny
-    public List<Ksiazka> statusMagazynu(List<Ksiazka> ksiazki) 
+    //Wypisanie stanu magazynu lub modyfikowanie stanu i ceny, dodawanie książek
+    public List<Ksiazka> StatusMagazynu(List<Ksiazka> ksiazki) 
     {
 
         
@@ -52,26 +58,15 @@ public class Pracownik
         {
             Console.WriteLine("1-wypisanie stanu magazynu.\n2-Modyfikuj cenę lub stan.\n3-Wróć.");
 
-            wybor = StrNaInt();
+            wybor = InputExceptionHandler.StrNaInt();
 
             switch(wybor)
             {   
             
             
-                case 1:  //wypisanie stanu magazynu
+                case 1:  //wypisanie stanu magazynu (niepotrzebne)
                 {
-                    for(int i=0; i<ksiazki.Count(); i++)
-                    {
-                        if(ksiazki[i] is KsiazkaFizyczna ksiazkafiz)
-                        {
-                            Console.WriteLine($"[{i}] Typ: fizyczna, tytuł: {ksiazkafiz.Tytul}, autor: {ksiazkafiz.Autor}, ilość w magazynie: {ksiazkafiz.Stan}, cena: {ksiazkafiz.CenaFiz}.");
-                        }
-                        else if(ksiazki[i] is KsiazkaElektroniczna ksiazkaelek)
-                        {
-                            //stan książki elektronicznej: 0-niedostępna, 1-dostępna
-                            Console.WriteLine($"[{i}] Typ: elektroniczna, tytuł: {ksiazkaelek.Tytul}, autor: {ksiazkaelek.Autor}, dostepna?: {ksiazkaelek.Stan}, cena: {ksiazkaelek.CenaEle}.");  
-                        }
-                    }
+                    
                 }
                 break;
 
@@ -79,21 +74,21 @@ public class Pracownik
                 {
                     Console.WriteLine("Wybierz numer ksiażki do zmiany stanu lub ceny.");
 
-                    wybor2 = StrNaInt();
+                    wybor2 = InputExceptionHandler.StrNaInt();
 
                     while(wybor2<0 || wybor2>ksiazki.Count())
                     {
                     Console.WriteLine("Niepoprawny numer. Wpisz ponownie: ");
-                    wybor2 = StrNaInt();
+                    wybor2 = InputExceptionHandler.StrNaInt();
                     }
 
                     Console.WriteLine("1-modyfikuj cenę\n2-modyfikuj stan.");
 
-                    wybor3  = StrNaInt();
+                    wybor3  = InputExceptionHandler.StrNaInt();
                     while(wybor3<1 || wybor3>2)
                     {
                     Console.WriteLine("Niepoprawny numer. Wpisz ponownie: ");
-                    wybor3 = StrNaInt();
+                    wybor3 = InputExceptionHandler.StrNaInt();
                     }
 
 
@@ -105,11 +100,11 @@ public class Pracownik
                     
                                 Console.WriteLine("Podaj nową cenę.");
 
-                                nowaCena = StrNaFloat();
+                                nowaCena = InputExceptionHandler.StrNaFloat();
                                 while(nowaCena<0)
                                 {
                                     Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                                    nowaCena = StrNaFloat();
+                                    nowaCena = InputExceptionHandler.StrNaFloat();
                                 }
                                 if(ksiazki[wybor2] is KsiazkaFizyczna ksiazkafiz)
                                 {
@@ -130,11 +125,11 @@ public class Pracownik
                         
                             Console.WriteLine("Podaj nowy stan: ");
 
-                            nowyStan = StrNaInt();
+                            nowyStan = InputExceptionHandler.StrNaInt();
                             while(nowyStan<0)
                             {
                                 Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                                nowyStan = StrNaInt();
+                                nowyStan = InputExceptionHandler.StrNaInt();
                             }
                             if(ksiazki[wybor2] is KsiazkaFizyczna ksiazkafiz)
                             {
@@ -145,7 +140,7 @@ public class Pracownik
                                 while(nowyStan>2)
                                 {
                                     Console.WriteLine("Ksiazka elektroniczna może być tylko 0-niedostępna, 1-dostępna. Wpisz ponownie: ");
-                                    nowyStan = StrNaInt();
+                                    nowyStan = InputExceptionHandler.StrNaInt();
                                 }
                             ksiazkaelek.Stan = nowyStan;
                             }
@@ -176,11 +171,11 @@ public class Pracownik
         {
             Console.WriteLine("1-Wyswietl zamowienia.\n2-Zmien stan zamowienia.\n3-Wróć.");
 
-            wybor=StrNaInt();
+            wybor= InputExceptionHandler.StrNaInt();
             while(wybor<1 || wybor >3)
             {
                 Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                wybor=StrNaInt();
+                wybor=InputExceptionHandler.StrNaInt();
             }
 
             if(wybor==1)
@@ -229,21 +224,21 @@ public class Pracownik
                
                 
                 Console.WriteLine("Wybierz zamówienie do modyfikacji: ");
-                opcja1 = StrNaInt();
+                opcja1 = InputExceptionHandler.StrNaInt();
 
                 while(opcja1<0 || opcja1>zamowienia.Count()) //to nie działa nie wiem dlaczego, jutro to naprawię
                 {
                     Console.WriteLine("Niepoprawne zamówienie. Wybierz ponownie: ");
-                    opcja1 = StrNaInt();
+                    opcja1 = InputExceptionHandler.StrNaInt();
                 }
 
                 Console.WriteLine("Podaj status przesyłki: ");
-                opcja2 = StrNaInt();
+                opcja2 = InputExceptionHandler.StrNaInt();
 
                 while(opcja2<0 || opcja2>4)
                 {
                     Console.WriteLine("Niepoprawny status. Wpisz ponownie: ");
-                    opcja2 = StrNaInt();
+                    opcja2 = InputExceptionHandler.StrNaInt();
                 }
 
                 zamowienia[opcja1].statusZamowienia = opcja2;
@@ -255,38 +250,8 @@ public class Pracownik
     }
 
 
-        private int StrNaInt()
-    {
-        string wyborStr;
-        int wejscie;
+       
 
-        while(true)
-            {
-
-
-                wyborStr = Console.ReadLine();
-                try
-                {
-                    wejscie = int.Parse(wyborStr);
-                    return wejscie;
-                }
-
-                catch (FormatException)
-                {
-                    Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                }
-            }
-    }
-
-    private float StrNaFloat()
-    {
-        float wejscie;
-        
-        while(!float.TryParse(Console.ReadLine(), out wejscie))
-        {
-            Console.WriteLine("Niepoprawna wartość. Wpisz ponownie: ");
-        }
-        return wejscie;
-    }
+ 
 }
 
