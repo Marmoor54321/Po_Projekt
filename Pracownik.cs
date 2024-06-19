@@ -70,7 +70,9 @@ public class Pracownik
                 }
                 break;
 
-                case 2: //modyfikowanie stanu i ceny
+                case 2: //modyfikowanie stanu i ceny //trzeba zmienić logikę-wpisywać nazwę książki której dane chcesz zmienić zamiast jej indeksu 
+                        //w Ksiegarnia jest metoda WyszukajKsiazke(), która ma od tego logikę
+
                 {
                     Console.WriteLine("Wybierz numer ksiażki do zmiany stanu lub ceny.");
 
@@ -226,7 +228,7 @@ public class Pracownik
                 Console.WriteLine("Wybierz zamówienie do modyfikacji: ");
                 opcja1 = InputExceptionHandler.StrNaInt();
 
-                while(opcja1<0 || opcja1>zamowienia.Count()) //to nie działa nie wiem dlaczego, jutro to naprawię
+                while(opcja1<0 || opcja1>zamowienia.Count()) 
                 {
                     Console.WriteLine("Niepoprawne zamówienie. Wybierz ponownie: ");
                     opcja1 = InputExceptionHandler.StrNaInt();

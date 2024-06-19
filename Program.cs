@@ -156,7 +156,7 @@ public class Program
 
             int opcja = StrNaInt();
             int opcja2;
-            string adresEmail;
+            
 
 
 
