@@ -1,3 +1,5 @@
+
+
 public static class InputExceptionHandler
 {
     public static int StrNaInt()

@@ -57,6 +57,9 @@ ksiegarnia.DodajZamowienie(zamowienie);
 
 using System.Reflection.Metadata;
 
+using System; //Contains fundamental classes and base classes that define commonly-used value and reference data types,
+              //events and event handlers, interfaces, attributes, and processing exceptions.
+
 public class Program
 {
         public static void Main()

@@ -90,7 +90,7 @@ public string Login
                     {   
                         if(formatKsiazki<0 || formatKsiazki >1)
                         {
-                            Console.WriteLine("Niepoprawny format książki 0-miękka okładka, 1-twarda okładka:");
+                            Console.WriteLine("Niepoprawny format książki 0-e-book, 1-audiobook:");
                             formatKsiazki = InputExceptionHandler.StrNaInt();
                         }
                         else
@@ -124,6 +124,12 @@ public string Login
                             {
                                 Console.WriteLine("Brak ksiazki na stanie.");
                                 break;
+                            }
+
+                            else if(ke.Stan>1)
+                            {
+                                Console.WriteLine("Link do książki: ");
+                                ke.GenerujLosoweUrl();
                             }
                         }
                         else if(ksiazka is KsiazkaFizyczna kf)

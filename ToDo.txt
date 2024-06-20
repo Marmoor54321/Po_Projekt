@@ -7,3 +7,4 @@ Pracownik:
 
 Ogólne:
 Zapisywanie listy książek w bibliotece, listy zamówień, użytkowników, pracowników 
+

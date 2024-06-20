@@ -25,6 +25,7 @@ public class Ksiazka
         set { kategoria = value; }
     }
    
+   
     public Ksiazka(string tytul, string autor, string kategoria)
     {
         this.tytul = tytul;

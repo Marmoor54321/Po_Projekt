@@ -1,3 +1,5 @@
+using System.Text;
+
 public class KsiazkaElektroniczna : Ksiazka
 {
 //gotowa klasa 
@@ -36,6 +38,10 @@ public class KsiazkaElektroniczna : Ksiazka
         
     }
 
+    /// <summary>
+    /// Zwraca cenę książki Elektronicznej
+    /// </summary>
+    /// <returns></returns>
     public override string GetDetails()
     {
         return base.GetDetails() + $", CenaEle: {cenaEle}";
@@ -48,4 +54,31 @@ public class KsiazkaElektroniczna : Ksiazka
         return 1; 
     }
     */
+
+    
+    private static Random random = new Random();
+
+    /// <summary>
+    /// tworzy losowy adres URL wyświetlany po zakupie książki elektronicznej
+    /// </summary>
+    /// <param name="length"></param>
+    /// <returns></returns>
+    public string GenerujLosoweUrl(int length = 10)
+    {
+        
+        string litery = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder builder = new StringBuilder();
+
+        
+        for (int i = 0; i < length; i++)
+        {
+            builder.Append(litery[random.Next(litery.Length)]);
+        }
+
+        
+        string losoweUrl= builder.ToString();
+        string url = $"https://www.ksiegarnia.com/ksiazka_elektroniczna/{losoweUrl}";
+
+        return url;
+    }
 }
