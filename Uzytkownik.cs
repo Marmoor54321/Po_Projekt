@@ -35,6 +35,12 @@ public string Login
         set {adres = value; }
     }
 
+    public List<Zamowienia> Zamowienia
+    {
+        get {return zamowienia;}
+        set {zamowienia = value;}
+    }
+
     public Uzytkownik()
     {
 
@@ -90,7 +96,7 @@ public string Login
                     {   
                         if(formatKsiazki<0 || formatKsiazki >1)
                         {
-                            Console.WriteLine("Niepoprawny format książki 0-e-book, 1-audiobook:");
+                            Console.WriteLine("Niepoprawny format książki 0-miękka okładka, 1-twarda okładka");
                             formatKsiazki = InputExceptionHandler.StrNaInt();
                         }
                         else
@@ -98,6 +104,24 @@ public string Login
                     }
                     kf.FormatKsiazki = formatKsiazki;
                 }
+                else if(koszyk[indeksKsiazki] is KsiazkaElektroniczna ke)
+                {
+                    Console.WriteLine($"Wybierz format książki {ke.Tytul} 0-ebook, 1-audiobook: ");
+                    formatKsiazki = InputExceptionHandler.StrNaInt();
+
+                   while(true)
+                    {   
+                        if(formatKsiazki<0 || formatKsiazki >1)
+                        {
+                            Console.WriteLine("Niepoprawny format książki 0-ebook, 1-audiobook:");
+                            formatKsiazki = InputExceptionHandler.StrNaInt();
+                        }
+                        else
+                        break;
+                    }
+                    ke.FormatKsiazki = formatKsiazki;
+                }
+                
 
                 Console.WriteLine($"Dodano książkę {ksiazki[i].Tytul} do koszyka.");
                 break;
@@ -126,10 +150,11 @@ public string Login
                                 break;
                             }
 
-                            else if(ke.Stan>1)
+                            else if(ke.Stan>=1)
                             {
-                                Console.WriteLine("Link do książki: ");
-                                ke.GenerujLosoweUrl();
+                                
+                                Console.WriteLine($"Link do książki {ksiazka.Tytul}: {ke.GenerujLosoweUrl()}");
+                                
                             }
                         }
                         else if(ksiazka is KsiazkaFizyczna kf)

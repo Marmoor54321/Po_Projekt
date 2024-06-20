@@ -1,19 +1,10 @@
-﻿
+﻿using System; //Contains fundamental classes and base classes that define commonly-used value and reference data types,
+              //events and event handlers, interfaces, attributes, and processing exceptions.
 
 //jakieś przykładowe klasy, można usunąć
+
+
 /*
-KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4, 1);
-
-KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10, 1);
-
-KsiazkaElektroniczna ksiazka3 =  new KsiazkaElektroniczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 1, 1);
-
-KsiazkaElektroniczna ksiazka4 =  new KsiazkaElektroniczna("Harry Potter 2", "J.K. Rowling", "Fantastyka", 99.99f, 1, 0);
-
-KsiazkaFizyczna ksiazka5 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10, 1);
-
-Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
-
 List<Ksiazka> ksiazki = [ksiazka1, ksiazka2, ksiazka3];
 
 Zamowienia zamowienie = new Zamowienia(321, ksiazki,0);
@@ -22,17 +13,8 @@ List<Ksiazka> ksiazki2 = [ksiazka4, ksiazka5,ksiazka1];
 
 Zamowienia zamowienie1 = new Zamowienia(456, ksiazki2, 0);
 
-marmur.DodajZamowienie(zamowienie);
-
-marmur.WyszukajKsiazke(zamowienie, "Wiedź");
-
-marmur.DodajDoKoszyka(ksiazka1);
-
-marmur.ZlozZamowienie();
-
-marmur.WyswietlZamowienia();
-
 */
+
 /*
 List<Zamowienia> listaZamowien = [zamowienie, zamowienie1];
 
@@ -55,29 +37,50 @@ ksiegarnia.DodajZamowienie(zamowienie);
 
 //rzeczywisty kod głównego programu
 
-using System.Reflection.Metadata;
 
-using System; //Contains fundamental classes and base classes that define commonly-used value and reference data types,
-              //events and event handlers, interfaces, attributes, and processing exceptions.
+
+
 
 public class Program
 {
         public static void Main()
         {
+            KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4);
 
+            KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10);
+
+            KsiazkaElektroniczna ksiazka3 =  new KsiazkaElektroniczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 1);
+
+            KsiazkaElektroniczna ksiazka4 =  new KsiazkaElektroniczna("Harry Potter 2", "J.K. Rowling", "Fantastyka", 99.99f, 1);
+
+            KsiazkaFizyczna ksiazka5 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10);
+
+            Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
+
+            List<Ksiazka> ksiazki1 = [ksiazka1, ksiazka2, ksiazka3, ksiazka4, ksiazka5];
+            
+            
+            
              Ksiegarnia ksiegarnia = new Ksiegarnia();
 
-             KsiazkaFizyczna ksiazka1 = new KsiazkaFizyczna("Tytul 1", "Autor 1", "Kategoria 1", 20.5f, 10);
-            KsiazkaElektroniczna ksiazka2 = new KsiazkaElektroniczna( "Tytul 2", "Autor 2", "Kategoria 2", 15.99f, 1);
+             Zamowienia zamowienie = new Zamowienia(1324,ksiazki1,0);
+
+             marmur.DodajZamowienie(zamowienie);
+
+             
             ksiegarnia.DodajKsiazke(ksiazka1);
             ksiegarnia.DodajKsiazke(ksiazka2);
+            ksiegarnia.DodajKsiazke(ksiazka3);
+            ksiegarnia.DodajKsiazke(ksiazka4);
+            ksiegarnia.DodajKsiazke(ksiazka5);
             
             
-            Uzytkownik uzytkownik1 = new Uzytkownik("user1", "haslo1", "user1@example.com", "Adres 1");
+            Uzytkownik uzytkownik1 = new Uzytkownik("user1", "haslo1", "przyklad@gmail.com", "Adres 1");
             ksiegarnia.DodajUzytkownika(uzytkownik1);
+            ksiegarnia.DodajUzytkownika(marmur);
             
            
-            Pracownik pracownik1 = new Pracownik("admin", "admin123", "admin@example.com");
+            Pracownik pracownik1 = new Pracownik("admin", "admin123", "adminprzyklad@gmail.com");
             ksiegarnia.DodajPracownika(pracownik1);
 
 
@@ -281,7 +284,7 @@ public class Program
             Console.WriteLine("2. Wyszukaj książkę");
             Console.WriteLine("3. Dodaj książkę");
             Console.WriteLine("4. Usuń książkę");
-            Console.WriteLine("5. Zarządzaj zamowieniami");
+            Console.WriteLine("5. Wyswietl zamowienia");
             Console.WriteLine("9. Wyloguj");
 
             int opcja;
@@ -372,7 +375,35 @@ public class Program
                         }
                 }
                 break;
-
+                
+                case 5:
+                {
+                    foreach (Uzytkownik uzytkownik in ksiegarnia.PobierzUzytkownikow())
+                    {
+                        Console.WriteLine($"Uzytkownik: {uzytkownik.Login}");
+                        foreach (Zamowienia zamowienie in uzytkownik.Zamowienia)
+                        {
+                            Console.WriteLine($"Id: {zamowienie.idZamowienia}, status: {zamowienie.statusZamowienia}.\nKsiazki: ");
+                            foreach(var ksiazka in zamowienie.ksiazki)
+                            {
+                                 
+                                        if(ksiazka is KsiazkaElektroniczna ke)
+                                        {
+                                            
+                                            Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria: {ke.Kategoria}, cena: {ke.CenaEle}, typ: elektroniczna, stan: {ke.Stan}, format: {ke.FormatKsiazki}.");
+                                        }
+                                        else if(ksiazka is KsiazkaFizyczna kf)
+                                        {
+                                    
+                                            Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, typ: fizyczna, stan: {kf.Stan}, format: {kf.FormatKsiazki}.");
+                                        }
+                                    
+                            }
+                        }
+                    }
+                }
+                break;
+                
                 case 9:
                 {
                     Console.WriteLine("Wylogowano.");
