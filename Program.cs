@@ -55,6 +55,8 @@ ksiegarnia.DodajZamowienie(zamowienie);
 
 //rzeczywisty kod głównego programu
 
+using System.Reflection.Metadata;
+
 public class Program
 {
         public static void Main()
@@ -134,7 +136,7 @@ public class Program
         if (zalogowanyUzytkownik != null)
         {
             Console.WriteLine($"Zalogowano jako użytkownik: {zalogowanyUzytkownik.Login}");
-            //tutaj dodawać funkcjonalności użytkownika
+            
             while (true)
         {
             string czescTytulu;
@@ -266,8 +268,8 @@ public class Program
         if (zalogowanyPracownik != null)
         {
             Console.WriteLine($"Zalogowano jako pracownik: {zalogowanyPracownik.Login}");
-            // Tutaj dodawać funkcjonalności pracownika
-            // TODO dokończyć opcje pracownika
+           
+            
 
             while(true)
             {
@@ -275,11 +277,8 @@ public class Program
             Console.WriteLine("1. Wyświetl książki");
             Console.WriteLine("2. Wyszukaj książkę");
             Console.WriteLine("3. Dodaj książkę");
-            Console.WriteLine("4. ");
-            Console.WriteLine("5. ");
-            Console.WriteLine("6. ");
-            Console.WriteLine("7. ");
-            Console.WriteLine("8. ");
+            Console.WriteLine("4. Usuń książkę");
+            Console.WriteLine("5. Zarządzaj zamowieniami");
             Console.WriteLine("9. Wyloguj");
 
             int opcja;
@@ -309,17 +308,65 @@ public class Program
 
                 case 3:
                 {
-                    int fizCzyElektr;
+                    int fizCzyElektr, stan;
                     string tytul;
                     string autor;
                     string kategoria;
+                    float cena;
 
                     Console.WriteLine("1-Fizyczna, 2-Elektroniczna");
                     fizCzyElektr = StrNaInt();
                     Console.WriteLine("Podaj Tytuł: ");
                     tytul = InputExceptionHandler.BezpiecznieWczytajString();
+                    Console.WriteLine("Podaj autora: ");
+                    autor = InputExceptionHandler.BezpiecznieWczytajString();
+                    Console.WriteLine("Podaj kategorię: ");
+                    kategoria = InputExceptionHandler.BezpiecznieWczytajString();
+                    if(fizCzyElektr == 1)
+                    {
+                        Console.WriteLine("Podaj cenę książki: ");
+                        cena = InputExceptionHandler.StrNaInt();
+                        Console.WriteLine("Podaj stan książki elektronicznej 1-dostępna, 0-niedostępna: ");
+                        stan = InputExceptionHandler.StrNaInt();
 
+                        KsiazkaElektroniczna ksiazka = new KsiazkaElektroniczna(tytul, autor, kategoria, cena, stan);
+                        ksiegarnia.DodajKsiazke(ksiazka);
+                    }
+                    if(fizCzyElektr == 2)
+                    {
+                        Console.WriteLine("Podaj cenę książki: ");
+                        cena = InputExceptionHandler.StrNaInt();
+                        Console.WriteLine("Podaj stan książki fizycznej: ");
+                        stan = InputExceptionHandler.StrNaInt();
 
+                        KsiazkaFizyczna ksiazka = new KsiazkaFizyczna(tytul, autor, kategoria, cena, stan);
+                        ksiegarnia.DodajKsiazke(ksiazka);
+                    }
+
+                }
+                break;
+                case 4:
+                {   
+                    int yesNo;
+                    
+                    Console.WriteLine("Podaj tytuł książki do usunięcia: ");
+
+                    czescTytulu = InputExceptionHandler.BezpiecznieWczytajString();
+
+                        List<Ksiazka> ksiazkiPomocnicze = ksiegarnia.PobierzKsiazki();
+
+                        for(int i=0; i<ksiegarnia.PobierzKsiazki().Count(); i++)
+                        {
+                            if (ksiazkiPomocnicze[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase));
+                            {
+                                Console.WriteLine($"Usunąć książkę {ksiazkiPomocnicze[i].Tytul}?\n1. Tak\n2. Nie");
+                                yesNo = InputExceptionHandler.StrNaInt();
+                                if(yesNo==1)
+                                {
+                                    ksiegarnia.UsunKsiazke(ksiazkiPomocnicze[i], ksiegarnia.PobierzKsiazki());
+                                }
+                            }
+                        }
                 }
                 break;
 

@@ -3,7 +3,7 @@ przy wyświetlaniu koszyka wypisać ile trzeba zapłacić
 Zaimplementować zliczanie sumy za książki i większą opłatę za twardą okładkę i audiobook (w Zamowienia jest metoda Suma, ale jeszcze jej nigdzie nie użyłem)
 
 Pracownik: 
-W metodach oddzielić logikę od interface'u i zaimplementować metody w programie głównym.
+
 
 Ogólne:
 Zapisywanie listy książek w bibliotece, listy zamówień, użytkowników, pracowników 

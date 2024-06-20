@@ -8,7 +8,6 @@ public class Ksiegarnia
   private List<Uzytkownik> uzytkownicy = new List<Uzytkownik>();
 
  
-
   private List<Pracownik> pracownicy = new List<Pracownik>();
 
   public Ksiegarnia()
@@ -99,6 +98,11 @@ public class Ksiegarnia
         }
         if(t==false)
         Console.WriteLine("Nie znaleziono książki.");        
+    }
+
+    public void UsunKsiazke(Ksiazka ksiazka, List<Ksiazka> ksiazki)
+    {
+        ksiazki.Remove(ksiazka);
     }
 
 
