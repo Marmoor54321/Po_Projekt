@@ -3,12 +3,12 @@ public class Uzytkownik
 //gotowa klasa
 {
     
-    private string login{get; set;}
-    public string haslo{get; set;}
-    private string email{get; set;}
-    private string adres{get; set;}
+    private string login {get; set;}
+    public string haslo {get; set;}
+    private string email {get; set;}
+    private string adres {get; set;}
 
-    public List<Zamowienia> zamowienia {get; set;}
+    public List<Zamowienia> zamowienia;
 
     public List<Ksiazka> koszyk {get; set;}
 
@@ -67,8 +67,8 @@ public string Login
     }
     */
 
-    bool t=false;
-    //wyszukuje książkę i wyświetla jej informacje w zamowieniu
+    
+    
     
     
     public void DodajZamowienie(Zamowienia zamowienie)
@@ -214,7 +214,7 @@ public string Login
         {
             foreach(var zamowienie in zamowienia)
             {
-                Console.WriteLine($"Id zamówienia: {zamowienie.idZamowienia}, status zamowienia: {zamowienie.statusZamowienia}.");
+                Console.WriteLine($"Id zamówienia: {zamowienie.idZamowienia}, status zamowienia: {SledzZamowienie(zamowienie.idZamowienia)}.");
             }
         }
 

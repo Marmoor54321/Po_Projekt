@@ -38,10 +38,9 @@ public class KsiazkaElektroniczna : Ksiazka
         
     }
 
-    /// <summary>
-    /// Zwraca cenę książki Elektronicznej
-    /// </summary>
-    /// <returns></returns>
+    
+    /// nie uzyte
+    
     public override string GetDetails()
     {
         return base.GetDetails() + $", CenaEle: {cenaEle}";

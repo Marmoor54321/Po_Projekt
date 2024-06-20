@@ -33,6 +33,7 @@ public class Ksiazka
         this.kategoria = kategoria;
     }
 
+    //nie używałem tej funkcji bo zapomniałem że istnieje (yay)
     public virtual string GetDetails()
     {
         return $"Tytul: {tytul}, Autor: {autor}, Kategoria: {kategoria}";

@@ -70,6 +70,8 @@ public class Pracownik
                 }
                 break;
 
+                        //stary kod, nie zaimplementowany
+
                 case 2: //modyfikowanie stanu i ceny //trzeba zmienić logikę-wpisywać nazwę książki której dane chcesz zmienić zamiast jej indeksu 
                         //w Ksiegarnia jest metoda WyszukajKsiazke(), która ma od tego logikę
 
@@ -161,6 +163,8 @@ public class Pracownik
         }
         return ksiazki;
     }
+
+    //nie zaimplementowany kod
 
      int opcja1,opcja2;
     public List<Zamowienia> StanZamowien(List<Zamowienia> zamowienia)   //wyświetla lub modyfikuje stan zamówień

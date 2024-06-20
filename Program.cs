@@ -45,7 +45,7 @@ public class Program
 {
         public static void Main()
         {
-            KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedźmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4);
+            KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedzmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4);
 
             KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10);
 
@@ -53,11 +53,11 @@ public class Program
 
             KsiazkaElektroniczna ksiazka4 =  new KsiazkaElektroniczna("Harry Potter 2", "J.K. Rowling", "Fantastyka", 99.99f, 1);
 
-            KsiazkaFizyczna ksiazka5 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10);
+            
 
             Uzytkownik marmur = new Uzytkownik("marmur", "123", "marmur@gmail.com", "Bialystok");
 
-            List<Ksiazka> ksiazki1 = [ksiazka1, ksiazka2, ksiazka3, ksiazka4, ksiazka5];
+            List<Ksiazka> ksiazki1 = [ksiazka1, ksiazka2, ksiazka3, ksiazka4];
             
             
             
@@ -72,7 +72,7 @@ public class Program
             ksiegarnia.DodajKsiazke(ksiazka2);
             ksiegarnia.DodajKsiazke(ksiazka3);
             ksiegarnia.DodajKsiazke(ksiazka4);
-            ksiegarnia.DodajKsiazke(ksiazka5);
+            
             
             
             Uzytkownik uzytkownik1 = new Uzytkownik("user1", "haslo1", "przyklad@gmail.com", "Adres 1");
@@ -320,7 +320,7 @@ public class Program
                     string kategoria;
                     float cena;
 
-                    Console.WriteLine("1-Fizyczna, 2-Elektroniczna");
+                    Console.WriteLine("1-Elektroniczna, 2-Fizyczna");
                     fizCzyElektr = StrNaInt();
                     Console.WriteLine("Podaj Tytuł: ");
                     tytul = InputExceptionHandler.BezpiecznieWczytajString();
@@ -348,6 +348,7 @@ public class Program
                         KsiazkaFizyczna ksiazka = new KsiazkaFizyczna(tytul, autor, kategoria, cena, stan);
                         ksiegarnia.DodajKsiazke(ksiazka);
                     }
+                    
 
                 }
                 break;
@@ -363,7 +364,7 @@ public class Program
 
                         for(int i=0; i<ksiegarnia.PobierzKsiazki().Count(); i++)
                         {
-                            if (ksiazkiPomocnicze[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase));
+                            if (ksiazkiPomocnicze[i].Tytul.StartsWith(czescTytulu, StringComparison.OrdinalIgnoreCase))
                             {
                                 Console.WriteLine($"Usunąć książkę {ksiazkiPomocnicze[i].Tytul}?\n1. Tak\n2. Nie");
                                 yesNo = InputExceptionHandler.StrNaInt();

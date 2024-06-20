@@ -34,6 +34,7 @@ public class KsiazkaFizyczna : Ksiazka
         
     }
 
+    //nie uzyte
     public override string GetDetails()
     {
         return base.GetDetails() + $", CenaFiz: {cenaFiz}, Stan: {stan}, Format: {formatKsiazki}";
