@@ -8,3 +8,4 @@ Pracownik:
 Ogólne:
 Zapisywanie listy książek w bibliotece, listy zamówień, użytkowników, pracowników 
 
+Stworzenie dokumentacji. Spróbuj uzyć docfx
