@@ -249,6 +249,10 @@ public string Login
 
             Console.WriteLine($"Łączna cena książek w koszyku: {totalPrice}");
         }
+        public string ToCsvString()
+    {
+        return $"{login},{haslo},{email},{adres}";
+    }
 
 
          

@@ -83,7 +83,14 @@ public class Program
             Pracownik pracownik1 = new Pracownik("admin", "admin123", "adminprzyklad@gmail.com");
             ksiegarnia.DodajPracownika(pracownik1);
 
+            List<Ksiazka> wszystkieKsiazki = new List<Ksiazka> { ksiazka1, ksiazka2, ksiazka3, ksiazka4 };
+            DataHelper.SaveKsiazkiToFile("ksiazki.txt", wszystkieKsiazki);
 
+            
+            List<Uzytkownik> wszyscyUzytkownicy = new List<Uzytkownik> { uzytkownik1, marmur };
+            DataHelper.SaveUzytkownicyToFile("uzytkownicy.txt", wszyscyUzytkownicy);
+            
+            Console.WriteLine("Dane książek zostały zapisane do pliku ksiazki.txt.");
             Console.WriteLine("Witaj w księgarni!");
 
             while (true)

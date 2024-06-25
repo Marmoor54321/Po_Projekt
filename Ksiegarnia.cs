@@ -104,6 +104,5 @@ public class Ksiegarnia
     {
         ksiazki.Remove(ksiazka);
     }
-
-
+    
 }
