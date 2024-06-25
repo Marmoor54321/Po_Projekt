@@ -220,29 +220,36 @@ public string Login
 
         public void WyswietlKoszyk()
         {
-            for(int i=0; i<koszyk.Count(); i++)
+            decimal totalPrice = 0;
+
+            for (int i = 0; i < koszyk.Count(); i++)
             {
-                foreach(var ksiazka in koszyk)
+                foreach (var ksiazka in koszyk)
                 {
-                if(ksiazka is KsiazkaElektroniczna ke)
-                {
-                    string format = "ebook";
-                    if(ke.FormatKsiazki ==1)
-                    format="audiobook";
-                    
-                    Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria:{ke.Kategoria}, cena: {ke.CenaEle}, format: {format}.");
-                }
-                else if(ksiazka is KsiazkaFizyczna kf)
-                {
-                    string format = "miękka okładka";
-                    if(kf.FormatKsiazki == 1)
-                    format = "twarda okładka";
-              
-                    Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, format: {format}.");
-                }
+                    if (ksiazka is KsiazkaElektroniczna ke)
+                    {
+                        string format = "ebook";
+                        if (ke.FormatKsiazki == 1)
+                            format = "audiobook";
+
+                        Console.WriteLine($"Tytul: {ke.Tytul}, autor: {ke.Autor}, kategoria: {ke.Kategoria}, cena: {ke.CenaEle}, format: {format}.");
+                        totalPrice += (decimal)ke.CenaEle;
+                    }
+                    else if (ksiazka is KsiazkaFizyczna kf)
+                    {
+                        string format = "miękka okładka";
+                        if (kf.FormatKsiazki == 1)
+                            format = "twarda okładka";
+
+                        Console.WriteLine($"Tytul: {kf.Tytul}, autor: {kf.Autor}, kategoria: {kf.Kategoria}, cena: {kf.CenaFiz}, format: {format}.");
+                        totalPrice += (decimal)kf.CenaFiz;
+                    }
                 }
             }
+
+            Console.WriteLine($"Łączna cena książek w koszyku: {totalPrice}");
         }
+
 
          
 }
