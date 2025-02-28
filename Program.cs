@@ -1,8 +1,6 @@
-﻿using System; //Contains fundamental classes and base classes that define commonly-used value and reference data types,
-              //events and event handlers, interfaces, attributes, and processing exceptions.
-
-//jakieś przykładowe klasy, można usunąć
-
+﻿using System; 
+using static InputExceptionHandler;
+             
 
 /*
 List<Ksiazka> ksiazki = [ksiazka1, ksiazka2, ksiazka3];
@@ -45,9 +43,10 @@ public class Program
 {
         public static void Main()
         {
+            //Przykładowe wartości do testowania
             KsiazkaFizyczna ksiazka1 =  new KsiazkaFizyczna("Wiedzmin", "Andrzej Sapkowski", "Akcja", 29.99f, 4);
 
-            KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 10);
+            KsiazkaFizyczna ksiazka2 =  new KsiazkaFizyczna("Rok 1984", "George Orwell", "Fantastyka naukowa", 29.99f, 1);
 
             KsiazkaElektroniczna ksiazka3 =  new KsiazkaElektroniczna("Harry Potter", "J.K. Rowling", "Fantastyka", 29.99f, 1);
 
@@ -89,8 +88,6 @@ public class Program
             
             List<Uzytkownik> wszyscyUzytkownicy = new List<Uzytkownik> { uzytkownik1, marmur };
             DataHelper.SaveUzytkownicyToFile("uzytkownicy.txt", wszyscyUzytkownicy);
-            
-            Console.WriteLine("Dane książek zostały zapisane do pliku ksiazki.txt.");
             Console.WriteLine("Witaj w księgarni!");
 
             while (true)
@@ -133,7 +130,7 @@ public class Program
 
         // Sprawdzanie czy użytkownik istnieje
         List<Uzytkownik> uzytkownicy = ksiegarnia.PobierzUzytkownikow();
-        Uzytkownik zalogowanyUzytkownik = null;
+        Uzytkownik? zalogowanyUzytkownik = null;
 
         foreach (var uzytkownik in uzytkownicy)
         {
@@ -267,7 +264,7 @@ public class Program
 
         // Sprawdzanie istnienia pracownika
         List<Pracownik> pracownicy = ksiegarnia.PobierzPracownikow();
-        Pracownik zalogowanyPracownik = null;
+        Pracownik? zalogowanyPracownik = null;
 
         foreach (var pracownik in pracownicy)
         {
@@ -292,7 +289,7 @@ public class Program
             Console.WriteLine("3. Dodaj książkę");
             Console.WriteLine("4. Usuń książkę");
             Console.WriteLine("5. Wyswietl zamowienia");
-            Console.WriteLine("9. Wyloguj");
+            Console.WriteLine("6. Wyloguj");
 
             int opcja;
 
@@ -349,11 +346,12 @@ public class Program
                     {
                         Console.WriteLine("Podaj cenę książki: ");
                         cena = InputExceptionHandler.StrNaInt();
-                        Console.WriteLine("Podaj stan książki fizycznej: ");
+                        Console.WriteLine("Podaj stan książki fizycznej 1-dostępna, 0-niedostępna: ");
                         stan = InputExceptionHandler.StrNaInt();
 
                         KsiazkaFizyczna ksiazka = new KsiazkaFizyczna(tytul, autor, kategoria, cena, stan);
                         ksiegarnia.DodajKsiazke(ksiazka);
+                        DataHelper.SaveKsiazkiToFile("ksiazki.txt", ksiegarnia.PobierzKsiazki());
                     }
                     
 
@@ -381,6 +379,7 @@ public class Program
                                 }
                             }
                         }
+                        DataHelper.SaveKsiazkiToFile("ksiazki.txt", ksiegarnia.PobierzKsiazki());
                 }
                 break;
                 
@@ -412,7 +411,7 @@ public class Program
                 }
                 break;
                 
-                case 9:
+                case 6:
                 {
                     Console.WriteLine("Wylogowano.");
                     return;
@@ -429,33 +428,7 @@ public class Program
     } 
     
     
-    static int StrNaInt()
-    {
-        string wyborStr;
-        int wejscie;
-
-        while(true)
-            {
-
-
-                wyborStr = InputExceptionHandler.BezpiecznieWczytajString();
-                try
-                {
-                    wejscie = int.Parse(wyborStr);
-                    return wejscie;
-                }
-
-                catch (FormatException)
-                {
-                    Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Wystąpił nieoczekiwany błąd: " + ex.Message);
-                    Console.WriteLine("Niepoprawna opcja. Wpisz ponownie: ");
-                }
-            }
-    }
+   
 
 
         

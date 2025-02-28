@@ -32,14 +32,14 @@ public static class InputExceptionHandler
 
     public static string BezpiecznieWczytajString()
 {
-    string input = null;
+    string input = "";
 
     while (string.IsNullOrEmpty(input))
     {
         try
         {
             
-            input = Console.ReadLine()?.Trim(); //trim usuwa puste znaki na końcu i na początku
+            input = (Console.ReadLine() ?? "").Trim(); 
 
             if (string.IsNullOrEmpty(input))
             {

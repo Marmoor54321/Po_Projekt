@@ -1,0 +1,2 @@
+user1,haslo1,przyklad@gmail.com,Adres 1
+marmur,123,marmur@gmail.com,Bialystok

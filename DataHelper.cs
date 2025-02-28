@@ -10,7 +10,7 @@ public static class DataHelper
         {
             foreach (var ksiazka in ksiazki)
             {
-                string linia_ksiazka = ConvertKsiazkaToString(ksiazka);
+                string linia_ksiazka = ConvertKsiazkaToString(ksiazka) ?? throw new NullReferenceException("Blad przy zapisie, ksiazka nie istnieje");
                 writer.WriteLine(linia_ksiazka);
             }
         }
@@ -28,7 +28,7 @@ public static class DataHelper
         }
     }
 
-    private static string ConvertKsiazkaToString(Ksiazka ksiazka)
+    private static string? ConvertKsiazkaToString(Ksiazka ksiazka)
     {
         if (ksiazka is KsiazkaElektroniczna ke)
         {

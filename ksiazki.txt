@@ -1,0 +1,3 @@
+Fizyczna,Rok 1984,George Orwell,Fantastyka naukowa,29,99,0,1
+Elektroniczna,Harry Potter,J.K. Rowling,Fantastyka,29,99,0,1
+Elektroniczna,Harry Potter 2,J.K. Rowling,Fantastyka,99,99,0,1

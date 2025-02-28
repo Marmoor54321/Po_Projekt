@@ -22,11 +22,6 @@ public class Pracownik
         get { return email; }
     }
 
-    public Pracownik()
-    {
-
-    }
-    
     public Pracownik(string login, string haslo, string email)
     {
         this.login = login;
@@ -70,7 +65,7 @@ public class Pracownik
                 }
                 break;
 
-                        //stary kod, nie zaimplementowany
+                        
 
                 case 2: //modyfikowanie stanu i ceny //trzeba zmienić logikę-wpisywać nazwę książki której dane chcesz zmienić zamiast jej indeksu 
                         //w Ksiegarnia jest metoda WyszukajKsiazke(), która ma od tego logikę
